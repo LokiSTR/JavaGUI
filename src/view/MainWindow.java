@@ -19,7 +19,7 @@ public class MainWindow {
 
     public MainWindow(MainController mc){
         setMainController(mc);
-        // Neues Hauptfenster erstellen
+        // Neues Hauptfenster erstellen (mainwindow wird von controller aus maincontroller erzeugt)
         _mainFrame = new JFrame();
         
         // Breite und Höhe des Fensters setzen
@@ -27,6 +27,7 @@ public class MainWindow {
         createMainOverview();
 
         // Standard-Operation, wenn das Fenster geschlossen wird
+        //heißt, damit man es schließen kann und nicht alles zusammen bricht muss man diese zeile hinzufügen
         _mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -48,9 +49,12 @@ public class MainWindow {
         model.addColumn("Marke"); 
         model.addColumn("PS"); 
         model.addColumn("Typ"); 
+        model.addColumn("Sitze");
 
         getMainPanel().add(getCarTable());
         getMainPanel().add(_createCar);
+
+        //hier gibt es erst den inhalt des windows
         getMainFrame().add(getMainPanel());
     }
 
@@ -64,7 +68,7 @@ public class MainWindow {
         }
 
         for(Auto a : getMainController().getAutos()){
-            model.addRow(new Object[]{a.getMarke(), a.getPs(), a.getTyp()});
+            model.addRow(new Object[]{a.getMarke(), a.getPs(), a.getTyp(), a.getSitze()});
         }
     }
 

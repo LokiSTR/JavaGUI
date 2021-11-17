@@ -14,9 +14,9 @@ public class NewCarController {
     }
 
 
-    public void addNewCar(String marke, String ps, String typ){
+    public void addNewCar(String marke, String ps, String typ, String sitze){
         // Neues Objekt vom Typ Auto erstellen und dieses dem Maincontroller mitgeben
-        Auto a = new Auto(marke, Integer.parseInt(ps), typ);
+        Auto a = new Auto(marke, Integer.parseInt(ps), typ, Integer.parseInt(sitze));
         getMainController().addNewCar(a);
 
         // Nachdem das Auto erstellt wurde kümmert sich der Controller um den Wechsel der Ansicht.
