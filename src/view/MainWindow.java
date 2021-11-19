@@ -48,13 +48,13 @@ public class MainWindow {
 
         _createCar = new JButton("Neues Auto");
         _createCar.setBounds(0,0,0,0);
-        _createCar.addActionListener(new createCarListener());
+        _createCar.addActionListener(new createFahrzeugListener());
         _createLKW = new JButton("Neuer LKW");
         _createLKW.setBounds(0,0,0,0);
-        _createLKW.addActionListener(new createLKWListener());
+        _createLKW.addActionListener(new createFahrzeugListener());
         _createMotorrad = new JButton("Neues Motorrad");
         _createMotorrad.setBounds(0,0,0,0);
-        _createMotorrad.addActionListener(new createMotorradListener());
+        _createMotorrad.addActionListener(new createFahrzeugListener());
 
         DefaultTableModel model = new DefaultTableModel(); 
         setCarTable(new JTable(model));
@@ -122,39 +122,25 @@ public class MainWindow {
 
     //für auto
 
-    class createCarListener implements ActionListener {
+    //implements heißt, dass diese klasse auch beutzt werden muss
+    class createFahrzeugListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == _createCar){
                 System.out.println("Auto erstellen - wechsle Ansicht zu newCarWindow");
                 getMainController().changeView("newcarwindow");
             }
-        }
-    }
-
-
-    //für lkw
-
-    class createLKWListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == _createLKW){
+            else if(e.getSource() == _createLKW){
                 System.out.println("LKW erstellen - wechsle Ansicht zu newLKWWindow");
                 getMainController().changeView("newlkwwindow");
             }
-        }
-    }
-
-
-    //für motorrad
-
-    class createMotorradListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == _createMotorrad){
+            else if(e.getSource() == _createMotorrad){
                 System.out.println("Motorrad erstellen - wechsle Ansicht zu newMotorradWindow");
                 getMainController().changeView("newmotorradwindow");
             }
+
         }
     }
-
+ 
     /**
      * 
      * SETTER UND GETTER
