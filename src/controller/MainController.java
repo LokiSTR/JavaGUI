@@ -30,6 +30,7 @@ public class MainController {
 
         getMainWindow().getMainFrame().setVisible(false);
 
+        //auto
         if(target == "newcarwindow"){
             new NewCarController(this);
         }
@@ -37,6 +38,7 @@ public class MainController {
             getMainWindow().getMainFrame().setVisible(true);
             getMainWindow().updateTable();
         }
+        //lkw
         if(target == "newlkwwindow"){
             new NewLKWController(this);
         }
@@ -44,6 +46,15 @@ public class MainController {
             getMainWindow().getMainFrame().setVisible(true);
             getMainWindow().updateTable();
         }
+        //motorrad
+        if(target == "newmotorradwindow"){
+            new NewMotorradController(this);
+        }
+        else if(target == "mainwindow"){
+            getMainWindow().getMainFrame().setVisible(true);
+            getMainWindow().updateTable();
+        }
+        
     }
     //ein neues auto hinzufügen
     public void addNewCar(Auto a){

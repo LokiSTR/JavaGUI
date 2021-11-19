@@ -31,7 +31,7 @@ public class MainWindow {
         _mainFrame = new JFrame();
         
         // Breite und Höhe des Fensters setzen
-        _mainFrame.setSize(600,400);
+        _mainFrame.setSize(400,300);
         createMainOverview();
 
         // Standard-Operation, wenn das Fenster geschlossen wird
