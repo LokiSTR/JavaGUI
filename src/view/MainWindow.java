@@ -6,10 +6,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
-import model.Fahrzeug;
-import model.Auto;
-import model.LKW;
-import model.Motorrad;
+import model.Fahrzeuge.Auto;
+import model.Fahrzeuge.Fahrzeug;
+import model.Fahrzeuge.LKW;
+import model.Fahrzeuge.Motorrad;
+
+import model.Personen.Kunde;
+import model.Personen.Verkaeufer;
+import model.Personen.Personen;
 
 public class MainWindow {
     
@@ -18,9 +22,13 @@ public class MainWindow {
     JTable _carTable;
     JTable _lkwTable;
     JTable _motorradTable;
+    JTable _kundeTable;
+    JTable _verkaeuferTable;
     JButton _createCar;
     JButton _createLKW;
     JButton _createMotorrad;
+    JButton _createKunde;
+    JButton _createVerkaeufer;
 
     MainController _mc;
 
@@ -31,7 +39,7 @@ public class MainWindow {
         _mainFrame = new JFrame();
         
         // Breite und Höhe des Fensters setzen
-        _mainFrame.setSize(400,300);
+        _mainFrame.setSize(1300,300);
         createMainOverview();
 
         // Standard-Operation, wenn das Fenster geschlossen wird
@@ -55,17 +63,25 @@ public class MainWindow {
         _createMotorrad = new JButton("Neues Motorrad");
         _createMotorrad.setBounds(0,0,0,0);
         _createMotorrad.addActionListener(new createFahrzeugListener());
+        _createKunde = new JButton("Neuer Kunde");
+        _createKunde.setBounds(0,0,0,0);
+        _createKunde.addActionListener(new createPersonenListener());
+        _createVerkaeufer = new JButton("Neuer Verkaeufer");
+        _createVerkaeufer.setBounds(0,0,0,0);
+        _createVerkaeufer.addActionListener(new createPersonenListener());
 
         DefaultTableModel model = new DefaultTableModel(); 
         setCarTable(new JTable(model));
         setLKWTable(new JTable(model));
         setMotorradTable(new JTable(model));
+        setKundeTable(new JTable(model));
+        setVerkaeuferTable(new JTable(model));
 
 
         // Create a couple of columns 
-        model.addColumn("Marke"); 
-        model.addColumn("PS"); 
-        model.addColumn("Typ"); 
+        model.addColumn("Marke/Vorname"); 
+        model.addColumn("PS/Nachname"); 
+        model.addColumn("Typ/Alter"); 
         model.addColumn("Spezial");
         
 
@@ -73,6 +89,8 @@ public class MainWindow {
         getMainPanel().add(_createCar);
         getMainPanel().add(_createLKW);
         getMainPanel().add(_createMotorrad);
+        getMainPanel().add(_createKunde);
+        getMainPanel().add(_createVerkaeufer);
 
         //hier gibt es erst den inhalt des windows
         getMainFrame().add(getMainPanel());
@@ -101,6 +119,17 @@ public class MainWindow {
             else if(a instanceof Motorrad){
                 Motorrad a_temp = (Motorrad) a;
                 model.addRow(new Object[]{a_temp.getMarke(), a_temp.getPs(), a_temp.getTyp(), a_temp.getReifenanzahl()});
+            }
+        }
+
+        for(Personen b : getMainController().getPersonen()){
+            if(b instanceof Kunde){
+                Kunde b_temp = (Kunde) b;
+                model.addRow(new Object[]{b_temp.getVorname(), b_temp.getNachname(), b_temp.getAlter(), b_temp.getKundennummer()});
+            }
+            else if(b instanceof Verkaeufer){
+                Verkaeufer b_temp = (Verkaeufer) b;
+                model.addRow(new Object[]{b_temp.getVorname(), b_temp.getNachname(), b_temp.getAlter(), b_temp.getPersonalnummer()});
             }
         }
     }
@@ -140,6 +169,19 @@ public class MainWindow {
 
         }
     }
+
+    class createPersonenListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == _createKunde){
+                System.out.println("Kunde erstellen - wechsle Ansicht zu newKundeWindow");
+                getMainController().changeView("newkundewindow");
+            }
+            else if(e.getSource() == _createVerkaeufer){
+                System.out.println("Verkäufer erstellen - wechsle Ansicht zu newVerkaeuferWindow");
+                getMainController().changeView("newverkaeuferwindow");
+            }
+        }
+    }
  
     /**
      * 
@@ -162,7 +204,13 @@ public class MainWindow {
     public JTable getMotorradTable() {
         return _motorradTable;
     }
-
+    public JTable getKundeTable() {
+        return _kundeTable;
+    }
+    public JTable getVerkaeuferTable() {
+        return _verkaeuferTable;
+    }
+    
     public JPanel getMainPanel() {
         return _mainPanel;
     }
@@ -183,7 +231,13 @@ public class MainWindow {
     public void setMotorradTable(JTable _motorradTable) {
         this._motorradTable = _motorradTable;
     }
-    
+    public void setKundeTable(JTable kundeTable) {
+        this._kundeTable = kundeTable;
+    }
+    public void setVerkaeuferTable(JTable verkaeuferTable) {
+        this._verkaeuferTable = verkaeuferTable;
+    }
+
     public void setMainPanel(JPanel _mainPanel) {
         this._mainPanel = _mainPanel;
     }
