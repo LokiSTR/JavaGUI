@@ -6,17 +6,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
+import model.Fahrzeug;
 import model.Auto;
 import model.LKW;
+import model.Motorrad;
 
 public class MainWindow {
     
     JFrame _mainFrame;
-    JPanel _mainPanel;
+    JPanel _mainPanel;  
     JTable _carTable;
     JTable _lkwTable;
+    JTable _motorradTable;
     JButton _createCar;
     JButton _createLKW;
+    JButton _createMotorrad;
 
     MainController _mc;
 
@@ -48,21 +52,27 @@ public class MainWindow {
         _createLKW = new JButton("Neuer LKW");
         _createLKW.setBounds(0,0,0,0);
         _createLKW.addActionListener(new createLKWListener());
+        _createMotorrad = new JButton("Neues Motorrad");
+        _createMotorrad.setBounds(0,0,0,0);
+        _createMotorrad.addActionListener(new createMotorradListener());
 
         DefaultTableModel model = new DefaultTableModel(); 
         setCarTable(new JTable(model));
         setLKWTable(new JTable(model));
+        setMotorradTable(new JTable(model));
+
 
         // Create a couple of columns 
         model.addColumn("Marke"); 
         model.addColumn("PS"); 
         model.addColumn("Typ"); 
-        model.addColumn("Sitze");
-        model.addColumn("Last");
+        model.addColumn("Spezial");
+        
 
         getMainPanel().add(getCarTable());
         getMainPanel().add(_createCar);
         getMainPanel().add(_createLKW);
+        getMainPanel().add(_createMotorrad);
 
         //hier gibt es erst den inhalt des windows
         getMainFrame().add(getMainPanel());
@@ -74,21 +84,24 @@ public class MainWindow {
         DefaultTableModel model = (DefaultTableModel) getCarTable().getModel();
 
         // Entferne alle aktuellen Elemente
-        // model.getrowcount()-1 die 1 steht für die anzahl an zeilen, die hinzugefügt wird
+        // sorgt dafür, dass am ende alle zeilen leer sind, bzw die tabelle gelöscht wird, bei jedem weiteren hinzufügen würde alles, was bereits hinzugefügt wurde nochmal hinzugefügt
         for(int i = model.getRowCount()-1; i >= 0; i--){
             model.removeRow(i);
         }
 
-        for(Auto a : getMainController().getAutos()){
-            model.addRow(new Object[]{a.getMarke(), a.getPs(), a.getTyp(), a.getSitze()});
-        }
-
-        // LKWs laden
-        //Entferne alle aktuellen Elemente
-        
-
-        for(LKW l : getMainController().getLKWs()){
-            model.addRow(new Object[]{l.getMarke(), l.getPs(), l.getTyp(), l.getLast()});
+        for(Fahrzeug a : getMainController().getFahrzeuge()){
+            if(a instanceof Auto){
+                Auto a_temp = (Auto) a;
+                model.addRow(new Object[]{a_temp.getMarke(), a_temp.getPs(), a_temp.getTyp(), a_temp.getSitze()});
+            }
+            else if(a instanceof LKW){
+                LKW a_temp = (LKW) a;
+                model.addRow(new Object[]{a_temp.getMarke(), a_temp.getPs(), a_temp.getTyp(), a_temp.getLast()});
+            }
+            else if(a instanceof Motorrad){
+                Motorrad a_temp = (Motorrad) a;
+                model.addRow(new Object[]{a_temp.getMarke(), a_temp.getPs(), a_temp.getTyp(), a_temp.getReifenanzahl()});
+            }
         }
     }
 
@@ -130,6 +143,18 @@ public class MainWindow {
         }
     }
 
+
+    //für motorrad
+
+    class createMotorradListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == _createMotorrad){
+                System.out.println("Motorrad erstellen - wechsle Ansicht zu newMotorradWindow");
+                getMainController().changeView("newmotorradwindow");
+            }
+        }
+    }
+
     /**
      * 
      * SETTER UND GETTER
@@ -148,6 +173,10 @@ public class MainWindow {
         return _lkwTable;
     }
 
+    public JTable getMotorradTable() {
+        return _motorradTable;
+    }
+
     public JPanel getMainPanel() {
         return _mainPanel;
     }
@@ -163,6 +192,10 @@ public class MainWindow {
 
     public void setLKWTable(JTable _lkwTable) {
         this._lkwTable = _lkwTable;
+    }
+
+    public void setMotorradTable(JTable _motorradTable) {
+        this._motorradTable = _motorradTable;
     }
     
     public void setMainPanel(JPanel _mainPanel) {
