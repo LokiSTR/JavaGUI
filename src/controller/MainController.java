@@ -22,7 +22,7 @@ import view.MainWindow;
 public class MainController {
 
     MainWindow _mainWindow;
-    ArrayList<Fahrzeug> _fahrzeuge;
+    ArrayList<Fahrzeug> _fahrzeuge = new ArrayList<Fahrzeug>();
     ArrayList<Personen> _personen;
 
 
