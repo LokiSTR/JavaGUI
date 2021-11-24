@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.ArrayList;
-
 import controller.MainController;
 import model.Fahrzeuge.Auto;
 import model.Fahrzeuge.Fahrzeug;
@@ -19,8 +17,6 @@ import model.Personen.Personen;
 
 public class MainWindow {
     
-    
-
     JFrame _mainFrame;
     JPanel _mainPanel;  
     JTable _carTable;
@@ -28,17 +24,13 @@ public class MainWindow {
     JTable _motorradTable;
     JTable _kundeTable;
     JTable _verkaeuferTable;
-    JDialog _maxPSBox;
     JButton _createCar;
     JButton _createLKW;
     JButton _createMotorrad;
     JButton _createKunde;
     JButton _createVerkaeufer;
-    JButton _maxPS;
 
     MainController _mc;
-
-    
 
 
     public MainWindow(MainController mc){
@@ -100,16 +92,9 @@ public class MainWindow {
         getMainPanel().add(_createKunde);
         getMainPanel().add(_createVerkaeufer);
 
-        _maxPS = new JButton("Max PS");
-        _maxPS.setBounds(0,0,0,0);
-        _maxPS.addActionListener(new createFahrzeugListener());
-        getMainPanel().add(_maxPS);
-
-        
-
+        //hier gibt es erst den inhalt des windows
+        getMainFrame().add(getMainPanel());
     }
-    
-    
 
     public void updateTable(){
         // Autos laden
@@ -147,20 +132,7 @@ public class MainWindow {
                 model.addRow(new Object[]{b_temp.getVorname(), b_temp.getNachname(), b_temp.getAlter(), b_temp.getPersonalnummer()});
             }
         }
-
-        
-
-    
-
-
     }
-
-
-             
-    
-
-    
-    
 
     // Zeigt oder versteckt (toggle) das Hauptfenster
     public void toggleMainWindow(){
@@ -198,6 +170,7 @@ public class MainWindow {
         }
     }
 
+<<<<<<< HEAD
     
     Fahrzeug maxPS;
 
@@ -218,6 +191,8 @@ public class MainWindow {
         }
     }
 
+=======
+>>>>>>> parent of 6bc3891 (maxPS azsgeben, mit fehlern)
     class createPersonenListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == _createKunde){
@@ -230,7 +205,6 @@ public class MainWindow {
             }
         }
     }
-    
  
     /**
      * 

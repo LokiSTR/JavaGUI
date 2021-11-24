@@ -12,7 +12,11 @@ public class MainController {
 
     MainWindow _mainWindow;
 <<<<<<< HEAD
+<<<<<<< HEAD
     ArrayList<Fahrzeug> _fahrzeuge = new ArrayList<Fahrzeug>();
+=======
+    ArrayList<Fahrzeug> _fahrzeuge;
+>>>>>>> parent of 6bc3891 (maxPS azsgeben, mit fehlern)
     ArrayList<Personen> _personen;
 =======
     ArrayList<Fahrzeug> _fahrzeuge;
