@@ -2,35 +2,27 @@ package controller;
 
 import java.util.ArrayList;
 
-import controller.FahrzeugeController.NewCarController;
-import controller.FahrzeugeController.NewLKWController;
-import controller.FahrzeugeController.NewMotorradController;
-import model.Fahrzeuge.Auto;
-import model.Fahrzeuge.Fahrzeug;
-import model.Fahrzeuge.LKW;
-import model.Fahrzeuge.Motorrad;
-
-import controller.PersonenController.NewKundeController;
-import controller.PersonenController.NewVerkaeuferController;
-
-import model.Personen.Kunde;
-import model.Personen.Verkaeufer;
-import model.Personen.Personen;
-
+import model.Auto;
+import model.Fahrzeug;
+import model.LKW;
+import model.Motorrad;
 import view.MainWindow;
 
 public class MainController {
 
     MainWindow _mainWindow;
+<<<<<<< HEAD
     ArrayList<Fahrzeug> _fahrzeuge = new ArrayList<Fahrzeug>();
     ArrayList<Personen> _personen;
+=======
+    ArrayList<Fahrzeug> _fahrzeuge;
+>>>>>>> parent of d00b4c4 (personen hinzugefügt)
 
 
 
 
     public MainController(){
         setFahrzeuge(new ArrayList<Fahrzeug>());
-        setPersonen(new ArrayList<Personen>());
 
         // das this ist das schlüsselwort, dafür, dass das mainwindow aus der view im kontakt mit dem maincontroller steht, damit man auch mit model interagieren kann, so kann auch der controller auf die view zugreifen und anders herum
         setMainWindow(new MainWindow(this));
@@ -47,23 +39,27 @@ public class MainController {
         if(target == "newcarwindow"){
             new NewCarController(this);
         }
-        else if(target == "newlkwwindow"){
+        else if(target == "mainwindow"){
+            getMainWindow().getMainFrame().setVisible(true);
+            getMainWindow().updateTable();
+        }
+        //lkw
+        if(target == "newlkwwindow"){
             new NewLKWController(this);
-        }
-        else if(target == "newmotorradwindow"){
-            new NewMotorradController(this);
-        }
-        else if(target == "newkundewindow"){
-            new NewKundeController(this);
-        }
-        else if(target == "newverkaeuferwindow"){
-            new NewVerkaeuferController(this);
         }
         else if(target == "mainwindow"){
             getMainWindow().getMainFrame().setVisible(true);
             getMainWindow().updateTable();
-        }   
-      
+        }
+        //motorrad
+        if(target == "newmotorradwindow"){
+            new NewMotorradController(this);
+        }
+        else if(target == "mainwindow"){
+            getMainWindow().getMainFrame().setVisible(true);
+            getMainWindow().updateTable();
+        }
+        
     }
     //ein neues auto hinzufügen
     public void addNewCar(Auto a){
@@ -83,18 +79,6 @@ public class MainController {
         System.out.println("Neues Motorrad erstellt!");
     }
 
-    //einen neuen kunden hinzufügen
-    public void addNewKunde(Kunde b){
-        getPersonen().add(b);
-        System.out.println("Neuer Kunde erstellt!");
-    }
-
-    //ein neues motorrad hinzufügen
-    public void addNewVerkaeufer(Verkaeufer b){
-        getPersonen().add(b);
-        System.out.println("Neuer Verkaeufer erstellt!");
-    }
-
     /**
      * 
      * SETTER UND GETTER
@@ -107,9 +91,7 @@ public class MainController {
     public void setFahrzeuge(ArrayList<Fahrzeug> _fahrzeuge) {
         this._fahrzeuge = _fahrzeuge;
     }
-    public void setPersonen(ArrayList<Personen> _personen) {
-        this._personen = _personen;
-    }
+
 
     //Getter
     public MainWindow getMainWindow() {
@@ -118,9 +100,6 @@ public class MainController {
 
     public ArrayList<Fahrzeug> getFahrzeuge() {
         return _fahrzeuge;
-    }
-    public ArrayList<Personen> getPersonen() {
-        return _personen;
     }
 
 }

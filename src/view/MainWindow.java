@@ -198,7 +198,6 @@ public class MainWindow {
         }
     }
 
-    // Fahrzeug _fahrzeug = new _fahrzeuge();
     
     Fahrzeug maxPS;
 
@@ -209,7 +208,7 @@ public class MainWindow {
             if(e.getSource() == _maxPS){
                 System.out.println("MaxPS berechnen");
                 //Version mit dem produkt
-                for(Fahrzeug a : getMainFrame().setVisible(false) && controller.MainController._fahrzeuge){
+                for(Fahrzeug a : controller.MainController.getFahrzeuge()){
                     if(a.getPs() > maxPS.getPs()){
                     maxPS = a;
                     }
