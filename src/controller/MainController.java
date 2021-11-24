@@ -16,10 +16,13 @@ public class MainController {
     ArrayList<Fahrzeug> _fahrzeuge = new ArrayList<Fahrzeug>();
 =======
     ArrayList<Fahrzeug> _fahrzeuge;
+<<<<<<< HEAD
 >>>>>>> parent of 6bc3891 (maxPS azsgeben, mit fehlern)
     ArrayList<Personen> _personen;
 =======
     ArrayList<Fahrzeug> _fahrzeuge;
+>>>>>>> parent of d00b4c4 (personen hinzugefügt)
+=======
 >>>>>>> parent of d00b4c4 (personen hinzugefügt)
 
 
